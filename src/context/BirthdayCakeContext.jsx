@@ -13,7 +13,7 @@ export const BirthdayCakeProvider = ({ children }) => {
     const totalCandles = 22;
 
     const [isCountdownComplete, setIsCountdownComplete] = useState(false);
-    const targetDate = useMemo(() => new Date('2025-04-11T00:00:00'), []);
+    const targetDate = useMemo(() => new Date('2025-04-15T00:00:00'), []);
 
     useEffect(() => {
         if (new Date() >= targetDate) {
