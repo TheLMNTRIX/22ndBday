@@ -1,0 +1,284 @@
+/* filepath: src/pages/ReasonsPage.module.css */
+.reasonsContainer {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: var(--background-color, #FFF8F0); /* Use CSS variables from global styles */
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px rgba(244, 172, 183, 0.15);
+    text-align: center;
+}
+
+.title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.5rem;
+    color: var(--primary-color, #F4ACB7);
+    margin-bottom: 1rem;
+    font-weight: normal;
+}
+
+.intro {
+    font-size: 1.2rem;
+    color: var(--text-color, #4A4A4A);
+    margin-bottom: 3rem;
+    line-height: 1.6;
+}
+
+.reasonsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.reasonItem {
+    /* Base styles for both wrapped and revealed */
+    padding: 0;
+    border-radius: 0.8rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 180px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* background-color: #ffffff; */ /* REMOVE default white background */
+    /* Border handled by revealedItem */
+}
+
+/* Remove hover effect from the item itself if ribbon is clickable */
+.reasonItem:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Wrapper for the revealed content (number + text) */
+.cardContentWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    background-color: #ffffff; /* Ensure this has a solid background */
+    border-radius: inherit;
+    border-left: 5px solid var(--primary-color, #F4ACB7); /* ADD the border here */
+}
+
+/* --- Ribbon Overlay --- */
+.ribbonOverlay {
+    position: absolute;
+    inset: 0; /* Cover the entire parent li */
+    cursor: pointer;
+    z-index: 2; /* Ensure ribbon is above content wrapper */
+    border-radius: inherit; /* Match parent rounding */
+    pointer-events: auto; /* Make it clickable */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ribbonOverlay:hover {
+    transform: scale(1.03); /* Slight grow effect on hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Define 6 Different Gift Wrap Backgrounds (applied to .ribbonOverlay) --- */
+.giftWrap1 {
+    background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+}
+.giftWrap2 {
+    background-color: #a1c4fd;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.2) 10px, rgba(255, 255, 255, 0.2) 20px);
+}
+.giftWrap3 {
+    background: radial-gradient(circle, #fbc2eb 0%, #a6c1ee 100%);
+}
+.giftWrap4 {
+    background-color: #d4fc79;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+}
+.giftWrap5 {
+    background: linear-gradient(to right, #fddb92 0%, #d1fdff 100%);
+}
+.giftWrap6 {
+    background-color: #ffecd2;
+    background-image: linear-gradient(135deg, #fcb69f 25%, transparent 25%), linear-gradient(225deg, #fcb69f 25%, transparent 25%), linear-gradient(45deg, #fcb69f 25%, transparent 25%), linear-gradient(315deg, #fcb69f 25%, #ffecd2 25%);
+    background-position: 10px 0, 10px 0, 0 0, 0 0;
+    background-size: 20px 20px;
+    background-repeat: repeat;
+}
+
+/* --- Define 6 Corresponding Ribbon Styles (applied via pseudo-elements on .ribbonOverlay) --- */
+/* Style 1: Simple White Horizontal Band */
+.ribbonOverlay.giftWrap1::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -5%; /* Extend slightly */
+    right: -5%;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.7);
+    transform: translateY(-50%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Style 2: Blue Vertical Band */
+.ribbonOverlay.giftWrap2::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -5%;
+    bottom: -5%;
+    width: 25px;
+    background: #6b93d8; /* Darker blue */
+    transform: translateX(-50%);
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Style 3: Pink Cross Ribbons + Bow */
+.ribbonOverlay.giftWrap3::before,
+.ribbonOverlay.giftWrap3::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 130, 190, 0.8); /* Pink */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+.ribbonOverlay.giftWrap3::before { /* Horizontal */
+    top: 50%;
+    left: -5%;
+    right: -5%;
+    height: 20px;
+    transform: translateY(-50%);
+}
+.ribbonOverlay.giftWrap3::after { /* Vertical */
+    left: 50%;
+    top: -5%;
+    bottom: -5%;
+    width: 20px;
+    transform: translateX(-50%);
+}
+
+/* Style 4: Thin Green Diagonal Ribbon */
+.ribbonOverlay.giftWrap4::before {
+    content: '';
+    position: absolute;
+    top: -15%;
+    left: 48%;
+    width: 15px;
+    height: 130%;
+    background: #5cb85c; /* Green */
+    transform: rotate(30deg);
+    transform-origin: center;
+}
+
+/* Style 5: Gold Double Vertical Bands */
+.ribbonOverlay.giftWrap5::before,
+.ribbonOverlay.giftWrap5::after {
+    content: '';
+    position: absolute;
+    top: -5%;
+    bottom: -5%;
+    width: 18px;
+    background: gold;
+    opacity: 0.8;
+}
+.ribbonOverlay.giftWrap5::before {
+    left: 35%;
+    transform: translateX(-50%);
+}
+.ribbonOverlay.giftWrap5::after {
+    left: 65%;
+    transform: translateX(-50%);
+}
+
+/* Style 6: Red Corner Bow */
+.ribbonOverlay.giftWrap6::before {
+    content: '🎀'; /* Using emoji as simple bow */
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 2.5rem;
+    color: #e74c3c; /* Red */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    transform: rotate(10deg);
+}
+
+.reasonNumber {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    color: var(--primary-color, #F4ACB7);
+    margin-bottom: 1rem;
+}
+
+.reasonContent {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.reasonText {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-color, #4A4A4A);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.placeholderText {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.1rem;
+    color: #aaa; /* Lighter color for placeholder */
+    font-style: italic;
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .title {
+        font-size: 3rem;
+    }
+    .intro {
+        font-size: 1.1rem;
+    }
+    .reasonsList {
+        grid-template-columns: 1fr; /* Stack items on smaller screens */
+        gap: 1.5rem;
+    }
+    .reasonItem {
+        min-height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .reasonsContainer {
+        padding: 1.5rem;
+        margin: 2rem auto;
+    }
+    .title {
+        font-size: 2.5rem;
+    }
+    .intro {
+        font-size: 1rem;
+    }
+    .reasonNumber {
+        font-size: 2rem;
+    }
+    .reasonText {
+        font-size: 1rem;
+    }
+    .reasonItem {
+        min-height: 130px;
+    }
+}

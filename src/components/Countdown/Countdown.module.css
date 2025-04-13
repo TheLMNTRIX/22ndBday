@@ -1,0 +1,219 @@
+.countdownContainer {
+  text-align: center;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgba(244, 172, 183, 0.2);
+  margin: 2rem auto;
+  max-width: 800px;
+}
+
+.countdownContainer h2 {
+  color: #F4ACB7;
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: normal;
+}
+
+.countdownWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.countdownUnit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdownNumber {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  display: block;
+}
+
+.countdownNumber::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.countdownLabel {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.separator {
+  font-size: 2.5rem;
+  color: #F4ACB7;
+  margin-top: -1.5rem;
+}
+
+.celebration {
+  position: relative; /* Needed for absolute positioning of confetti */
+  overflow: hidden; /* Keep confetti contained */
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: #FFF8F0;
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgba(244, 172, 183, 0.3);
+}
+
+/* Add styles for the confetti image */
+.confettiImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the entire area */
+  opacity: 0.4; /* Adjust transparency */
+  z-index: 0; /* Place it behind the text */
+  pointer-events: none; /* Prevent interaction */
+}
+
+.celebration h1,
+.celebrationText {
+  position: relative; /* Ensure text is above the confetti */
+  z-index: 1;
+}
+
+.celebration h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 4rem;
+  color: #F4ACB7;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.celebrationText {
+  font-size: 1.2rem;
+  color: #4A4A4A;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+  animation: fadeIn 2s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Styles for DigitFlip */
+.digitPair {
+  display: flex;
+}
+
+.digitContainer {
+  position: relative;
+  width: 45px;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #FFF8F0;
+  border: 1px solid #F4ACB7;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: #4A4A4A;
+}
+
+.digitPair > .digitContainer:first-child {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-right: none;
+}
+
+.digitPair > .digitContainer:last-child {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.digitSpan {
+  display: block;
+  position: absolute;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .countdownNumber {
+    font-size: 2.5rem;
+    width: 70px;
+    height: 70px;
+  }
+  
+  .countdownContainer h2 {
+    font-size: 2rem;
+  }
+  
+  .separator {
+    font-size: 2rem;
+  }
+
+  .digitContainer {
+    width: 35px;
+    height: 70px;
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .countdownWrapper {
+    flex-wrap: wrap;
+  }
+  
+  .countdownNumber {
+    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+  }
+  
+  .countdownLabel {
+    font-size: 0.8rem;
+  }
+  
+  .separator {
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
+  }
+
+  .digitContainer {
+    width: 30px;
+    height: 60px;
+    font-size: 2rem;
+  }
+}

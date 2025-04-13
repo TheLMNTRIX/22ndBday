@@ -1,0 +1,204 @@
+/* filepath: c:\Users\rohit\OneDrive\Desktop\22nd Bday\birthday-website\src\components\PhotoGallery\PhotoGallery.module.css */
+.galleryContainer {
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to bottom, var(--background-color), rgba(244, 172, 183, 0.1)); /* Subtle gradient */
+}
+
+.galleryTitle {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: normal;
+}
+
+.galleryIntro {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  text-align: center;
+  max-width: 700px;
+  /* Add auto margins for horizontal centering */
+  margin-left: auto;
+  margin-right: auto;
+  /* Keep existing bottom margin */
+  margin-bottom: 0rem;
+  line-height: 1.6;
+}
+
+.heartContainer {
+  width: 80vw; /* Responsive width */
+  height: 85vw; /* Responsive height */
+  max-width: 750px; /* Max size */
+  max-height: 750px; /* Max size */
+  position: relative;
+  margin: -3.5rem auto 0;
+  /* Apply the clip path */
+  clip-path: url(#heart-clip-gallery);
+  -webkit-clip-path: url(#heart-clip-gallery); /* For Safari */
+  border-radius: 5px; /* Slight rounding for clipped edges */
+  box-shadow: 0 10px 30px rgba(244, 172, 183, 0.2);
+}
+
+/* Optional Heart Border Effect */
+.heartContainer::before {
+  content: '';
+  position: absolute;
+  top: 0; /* Reset offsets */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Remove the border property */
+  /* border: 3px solid var(--primary-color); */
+  border-radius: 5px; /* Keep rounding consistent */
+  /* Use inset box-shadow for the border effect */
+  box-shadow: inset 0 0 0 3px var(--primary-color); /* 3px inset pink shadow */
+  clip-path: url(#heart-clip-gallery);
+  -webkit-clip-path: url(#heart-clip-gallery);
+  pointer-events: none; /* Don't interfere with clicks */
+  z-index: 2; /* Ensure border is above content but below fullscreen */
+  opacity: 0.8; /* Slightly transparent */
+}
+
+.collageContainer {
+  width: 100%;  
+  height: 100%;
+  position: relative; /* Changed from flex to relative for absolute positioning of children */
+  overflow: hidden; /* Ensure images stay within bounds */
+}
+
+.collageImageWrapper {
+  position: absolute; /* Position images absolutely within the container */
+  overflow: hidden; /* Hide parts of image outside its own box */
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--background-color); /* BG for loading */
+}
+
+.collageImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the area */
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.collageImageWrapper:hover .collageImage {
+   transform: scale(1.1); /* Subtle zoom on image hover */
+}
+
+/* --- Fullscreen Modal Styles --- */
+
+.fullscreenBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001; /* Above nav */
+  cursor: pointer;
+}
+
+.fullscreenContent {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  background-color: var(--background-color);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  cursor: default;
+  display: flex; /* Use flex for layout inside */
+  flex-direction: column;
+  align-items: center;
+}
+
+.fullscreenImage {
+  display: block;
+  max-width: 100%;
+  max-height: calc(85vh - 60px); /* Adjust based on padding/caption */
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 24px;
+  line-height: 35px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  z-index: 1002;
+}
+
+.closeButton:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.fullscreenCaption {
+  margin-top: 15px;
+  color: var(--text-color);
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .galleryTitle {
+    font-size: 2.5rem;
+  }
+  .galleryIntro {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  .heartContainer {
+    width: 90vw;
+    height: 90vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .galleryTitle {
+    font-size: 2rem;
+  }
+   .galleryIntro {
+    font-size: 0.9rem;
+  }
+  .heartContainer {
+    width: 95vw;
+    height: 95vw;
+  }
+   .fullscreenContent {
+     padding: 10px;
+   }
+   .fullscreenImage {
+     max-height: calc(80vh - 40px);
+   }
+   .closeButton {
+     width: 30px;
+     height: 30px;
+     font-size: 20px;
+     line-height: 30px;
+     top: 5px;
+     right: 8px;
+   }
+   .fullscreenCaption {
+     font-size: 0.9rem;
+     margin-top: 10px;
+   }
+}

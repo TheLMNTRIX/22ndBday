@@ -1,0 +1,471 @@
+/* filepath: src/components/Timeline/timeline.module.css */
+
+:root {
+    --primary-color: #F4ACB7; /* Soft Pink */
+    --line-color: #e0c9b0; /* Muted Gold/Beige for the line */
+    --background-color: #FFF8F0; /* Cream */
+    --text-color: #4A4A4A; /* Dark Grey */
+    --year-color: #F4ACB7; /* Same as primary for years */
+    --date-color: #999; /* Subtle gray for dates */
+    --node-bg: #F4ACB7; /* Node background color */
+    --details-bg: #ffffff; /* Details background color */
+    --details-shadow: rgba(0, 0, 0, 0.12); /* Shadow for details */
+}
+
+.timelineContainer {
+    width: 95%;
+    max-width: 1100px;
+    margin: 2px auto; /* Reduced from 60px to 30px */
+    padding: 20px 0; /* Reduced from 40px to 20px */
+    font-family: 'Lato', sans-serif;
+    animation: none; /* override the original animation */
+    opacity: 1; /* ensure it's visible */
+}
+
+.timelineContainer h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    font-family: 'Great Vibes', cursive;
+    font-size: 3em;
+    font-weight: normal;
+    animation: none; /* override the original animation */
+    opacity: 1; /* ensure it's visible */
+}
+
+/* Timeline container */
+.timeline {
+    position: relative;
+    padding: 20px 0 0;
+    display: flex; /* Use flex for alignment */
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+}
+
+/* Line segments between nodes */
+.lineSegment {
+    width: 4px;
+    height: 70px; /* Adjust height as needed */
+    background-color: var(--line-color);
+    border-radius: 2px;
+    margin: 0; /* Remove default margins */
+    animation: none; /* override the original animation */
+    transform-origin: top center; /* Make line grow from top to bottom */
+    transform: none; /* reset transform */
+}
+
+/* Event container base styles */
+.event {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    min-height: 50px;
+    margin: 10px 0;
+    /* For debugging */
+    /* border: 1px dashed blue; */
+}
+
+/* Node container for better positioning control */
+.nodeContainer {
+    position: absolute;
+    left: 50%; /* Center in timeline */
+    transform: translateX(-50%); /* Center the container itself */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    /* For debugging */
+    /* border: 1px dashed green; */
+}
+
+/* Node positioning */
+.node {
+    width: 28px;
+    height: 28px;
+    background-color: var(--node-bg);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 5px solid #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: none; /* override the original animation */
+    transform: scale(1); /* reset transform */
+    opacity: 1; /* ensure it's visible */
+}
+
+.node:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 15px rgba(244, 172, 183, 0.6);
+}
+
+/* --- Alternating Layout Styles --- */
+
+/* Date Section Specifics */
+.dateSection {
+    position: absolute;
+    width: calc(50% - 60px); /* Gap from center */
+    z-index: 2;
+    /* Move 20px upward from center */
+    top: calc(50% - 30px);
+    transform: none;
+    animation: none;
+}
+
+.year {
+    display: block;
+    font-size: 1.6em;
+    font-weight: 600;
+    color: var(--year-color);
+    margin-bottom: 2px;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.event:hover .year {
+    color: #e07f8e;
+    transform: translateY(-2px);
+}
+
+.date {
+    display: block;
+    font-size: 0.9em;
+    color: var(--date-color);
+    font-style: italic;
+}
+
+/* Details Section Specifics */
+.details {
+    position: absolute;
+    width: calc(50% - 60px);
+    background-color: var(--details-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--details-shadow);
+    padding: 15px 20px;
+    z-index: 10;
+    transform: none;
+}
+/* Speech bubble pointer */
+.pointer {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: var(--details-bg);
+    transform: rotate(45deg);
+    z-index: 9;
+    top: 24px; /* Keep fixed position relative to the details container */
+}
+
+/* Critical pointer specific positioning */
+.pointerLeft {
+    left: -8px;
+    box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.05);
+    animation-delay: 0.2s;
+}
+
+.pointerRight {
+    right: -8px;
+    box-shadow: 1px -1px 2px rgba(0, 0, 0, 0.05);
+    animation-delay: 0.2s;
+}
+
+/* Close button styling */
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s;
+    z-index: 11; /* Ensure it's above other content */
+}
+
+.closeButton:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #333;
+}
+
+/* Positioning Modifiers */
+.dateSectionLeft {
+    left: 0;
+    text-align: right;
+    padding-right: 10px; /* Reduced from 60px to be 20px closer to center line */
+    animation-delay: 0.2s;
+}
+
+.dateSectionRight {
+    right: 0;
+    text-align: left;
+    padding-left: 10px; /* Reduced from 60px to be 20px closer to center line */
+    animation-delay: 0.2s;
+}
+
+.detailsLeft {
+    right: calc(50% + 40px); /* Changed from 20px to 28px (8px more) */
+    top: -12px; /* Move 4px up */
+}
+
+.detailsRight {
+    left: calc(50% + 40px); /* Changed from 20px to 28px (8px more) */
+    top: -12px; /* Move 4px up */
+}
+
+/* --- Details Content --- */
+.eventImage {
+    width: 100%;
+    max-height: 300px; /* Maximum height instead of fixed height */
+    object-fit: contain; /* Changed from cover to contain */
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.details h4 {
+    margin: 0 0 8px 0;
+    color: var(--primary-color);
+    font-size: 1.2em;
+    font-weight: 700;
+    padding-right: 20px; /* Space for close button */
+}
+
+.eventDate {
+    font-size: 0.85em;
+    color: #888;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.details p {
+    margin: 0;
+    font-size: 0.95em;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+/* --- Responsive adjustments --- */
+@media (max-width: 768px) {
+    .timelineContainer {
+        width: 95%;
+        max-width: none;
+    }
+    
+    .timelineContainer h2 {
+        font-size: 2.5em;
+    }
+    
+    /* Reduce gap for tablets */
+    .dateSection, .details {
+        width: calc(50% - 45px);
+    }
+    
+    .dateSectionLeft {
+        padding-right: 45px;
+    }
+    
+    .dateSectionRight {
+        padding-left: 45px;
+    }
+    
+    .node {
+        width: 26px;
+        height: 26px;
+        border-width: 4px;
+    }
+    
+    .lineSegment {
+        height: 60px;
+    }
+    
+    .year {
+        font-size: 1.4em;
+    }
+    
+    .details h4 {
+        font-size: 1.1em;
+    }
+    
+    .details p {
+        font-size: 0.9em;
+    }
+    
+    .eventImage {
+        height: 130px;
+    }
+}
+
+@media (max-width: 480px) {
+    .timelineContainer {
+        width: 100%;
+        padding: 30px 15px;
+        margin: 40px auto;
+    }
+    
+    .timelineContainer h2 {
+        font-size: 2.2em;
+        margin-bottom: 40px;
+    }
+    
+    .timeline {
+        align-items: flex-start;
+        padding-left: 30px;
+    }
+    
+    .lineSegment {
+        height: 50px;
+        margin-left: 0;
+    }
+    
+    .nodeContainer {
+        position: absolute;
+        left: 0;
+        width: auto;
+    }
+    
+    .node {
+        width: 22px;
+        height: 22px;
+        border-width: 4px;
+    }
+    
+    /* Stack date and details vertically on the right */
+    .dateSection, .details {
+        position: relative; /* Back to relative */
+        width: auto; left: auto; right: auto; text-align: left;
+        margin-left: 55px; /* Space from line/node */
+        padding: 0;
+        top: auto; /* Reset top */
+        transform: none; /* Reset transform */
+    }
+    
+    .dateSection {
+        margin-bottom: 5px;
+        margin-top: -5px; /* Adjust vertical spacing */
+    }
+    
+    .details {
+        top: 0;
+        transform: none;
+    }
+    
+    /* Adjust pointer for mobile */
+    .pointer {
+        top: 20px; /* Fixed position at top of details box on mobile */
+        margin-top: 0; /* Reset margin */
+    }
+    
+    /* Keep the pointer always on the left in mobile view */
+    .pointerLeft, .pointerRight {
+        left: -8px;
+        right: auto;
+    }
+    
+    /* Remove side-specific positioning */
+    .dateSectionLeft, .dateSectionRight, .detailsLeft, .detailsRight {
+        left: auto; right: auto; text-align: left; padding: 0; margin-left: 55px;
+    }
+    
+    .event {
+        margin-bottom: 15px;
+    }
+    
+    .year {
+        font-size: 1.3em;
+    }
+    
+    .date {
+        font-size: 0.8em;
+    }
+    
+    .details h4 {
+        font-size: 1.05em;
+    }
+    
+    .details p {
+        font-size: 0.85em;
+    }
+    
+    .eventImage {
+        margin-top: 5px;
+    }
+}
+
+/* Future message at the end of timeline */
+.futureMessage {
+    margin-top: 15px;
+    margin-bottom: 1px;
+    text-align: center;
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.8em;
+    color: var(--primary-color);
+    max-width: 80%;
+    line-height: 1.4;
+    opacity: 1;
+    position: relative;
+    padding: 15px 20px;
+    animation: none;
+}
+
+.futureMessage::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    background: var(--background-color);
+    border-radius: 50%;
+    border: 2px dashed var(--primary-color);
+    animation: pulseBorder 2s infinite;
+}
+
+/* Adjust mobile styling for the message */
+@media (max-width: 480px) {
+    .futureMessage {
+        font-size: 1.5em;
+        margin-left: 30px;
+        text-align: left;
+        max-width: 90%;
+    }
+    
+    .futureMessage::before {
+        left: -15px;
+        transform: none;
+    }
+}
+
+/* --- Animation Effects --- */
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 0.9;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseBorder {
+    0% { border-color: var(--primary-color); opacity: 0.6; }
+    50% { border-color: var(--primary-color); opacity: 1; }
+    100% { border-color: var(--primary-color); opacity: 0.6; }
+}
